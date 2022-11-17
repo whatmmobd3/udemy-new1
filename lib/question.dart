@@ -3,13 +3,13 @@ import 'package:flutter/cupertino.dart';
 class Question extends StatelessWidget {
   final String questionText;
 
-  Question(this.questionText);
+  const Question(this.questionText);
 
   @override
   Widget build(BuildContext context) {
     return Container(
         width: double.infinity,
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         child: Text(
           questionText,
           style: const TextStyle(fontSize: 15),
