@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:new1/answer.dart';
 import 'package:new1/question.dart';
+import 'package:new1/quiz.dart';
+import 'package:new1/result.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +16,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final questions = const [
+  final _questions = const [
     {
       'questionText': "What 's your dream?",
       "answer": ['Engineer', "Lawyer", "Doctor"]
@@ -35,10 +37,12 @@ class _MyAppState extends State<MyApp> {
       _questionIndex = _questionIndex + 1;
     });
     print(_questionIndex);
-    if (_questionIndex < questions.length) {
+    if (_questionIndex < _questions.length) {
       print('We have more questions');
+
     } else {
       print("No more questions");
+      // _questionIndex = 0;
     }
   }
 
@@ -49,19 +53,12 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text("First Title"),
         ),
-        body: _questionIndex < questions.length
-            ? Column(
-                children: [
-                  Question(
-                      questions[_questionIndex]['questionText'].toString()),
-                  // Answer(_answerQuestion, "123"),
-                  ...(questions[_questionIndex]['answer'] as List<String>)
-                      .map((answer) {
-                    return Answer(_answerQuestion, answer);
-                  }).toList()
-                ],
-              )
-            : Center(child: Text("123")),
+        body: _questionIndex < _questions.length
+            ? Quiz(
+                questions: _questions,
+                questionIndex: _questionIndex,
+                answerQuestion: _answerQuestion)
+            : Result(),
       ),
     );
   }
